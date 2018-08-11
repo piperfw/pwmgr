@@ -64,6 +64,7 @@ Equivalently, change the value the `archive_name` setting in `pwmgr_config`.
 ### Planned features
 - Option to use xsel instead of xclip
 - Windows port using the pyclip python package
+- Option to include punctuation in generated passwords
 
 ##### Disclaimer
 This program was written for fun. I cannot advise using it to store passwords for accounts other than those that are absolutely expendable. In particular, please do _not_ rely on the password generator tool included with the script to create a secure password (its randomness is only as good as your system's `os.urandom()` implementation).
