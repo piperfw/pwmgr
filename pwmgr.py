@@ -170,8 +170,8 @@ class PassManager:
 			'id', str(int(232+min(abs(23 * user_print_scale), 23))))
 		# Set logging level according to setting in self.config_dict (default INFO).
 		self.set_logging_level()
-		if self.options['set_archive']:
-			self.set_archive_save_to_config(self.options['set_archive'])
+		if self.options['set-archive']:
+			self.set_archive_save_to_config(self.options['set-archive'])
 		# string to hold contents of self.PASSWORD_FILENAME extracted from the archive
 		self.password_file_string = ''
 		# Set to store names of all applications found in archive (repeats omitted)
