@@ -364,7 +364,7 @@ class PassManager:
 				if os.path.splitext(filename)[1] == '.7z':
 					print(filename)
 			# Prompt user and set 'archive_name' setting to user's response unless the response is 'q'.
-			print('Enter desired archive (including extension) or q to quit:', end=' ')
+			print('Enter desired archive or q to quit:', end=' ')
 			user_respose = input().strip()
 			# Note: 'q' does not have a .7z extension so cannot be an archive.
 			if user_respose == 'q':
