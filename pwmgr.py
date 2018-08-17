@@ -522,17 +522,18 @@ class PassManager:
 			# Obtain new password from get_new_pword (which is also used to get archive pword)
 			# self.options['update'] is used in the password prompt and the user may use the pword generator tool.
 			new_pword = self.get_new_pword(self.options['update'], offer_to_generate_password=True)
+			# Displayed to user to notify of success
+			str_to_print = 'Password successfully added to archive'
 			# Print and/or copy pword to X selection if appropriate.
 			if self.config_dict['always_print'] and self.config_dict['copy_to_selection']:
 				self.xclip_copy_to_selection(new_pword)
-				print('Your new password for {} is:\n{}{}{}\nThis has been copied to {}.'.format(self.options['update'],
-					self.hidden_print_colour, new_pword, self.RESET_ANSI, self.config_dict['selection']))
+				str_to_print += '.\nYour new password for {} is:\n{}{}{}\nThis has been copied to {}.'.format(
+					self.options['update'], self.hidden_print_colour, new_pword, self.RESET_ANSI, self.config_dict['selection'])
 			elif self.config_dict['always_print']:
-				print('Your new password for {} is:\n{}'.format(self.options['update'], new_pword))
+				str_to_print += '.\nYour new password for {} is:\n{}'.format(self.options['update'], new_pword)
 			elif self.config_dict['copy_to_selection']:
 				self.xclip_copy_to_selection(new_pword)
-				print('Your new password for {} has been copied to {}.'.format(
-					self.options['update'], self.config_dict['selection']))
+				str_to_print += ' (copied to {}).'.format(self.config_dict['selection'])
 			# New entry to replace current application_name password (space delimited)
 			new_entry = self.options['update'] + ' ' + new_pword + '\n'
 			logger.debug('New entry to be added to {}: {}'.format(self.config_dict['archive_name'], new_entry.strip()))
@@ -543,9 +544,10 @@ class PassManager:
 				self.lines_to_write.insert(index, new_entry)
 			else:
 				self.lines_to_write.append(new_entry)
-			# Update the archive
+			# Update the archive and notify user.
 			self.update()
-			# Set flag to ensure this function is never run again (see self.parse_password_file_string().)
+			print(str_to_print)
+			# Set flag to ensure this function is never run again (see self.parse_password_file_string()).
 			self.archive_updated = True
 
 	def get_new_pword(self, name, offer_to_generate_password=False):
