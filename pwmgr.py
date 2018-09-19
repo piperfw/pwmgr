@@ -604,15 +604,16 @@ class PassManager:
 		of the password is determined by self.config_dict['generated_password_length'], which must be between 
 		self.MIN_GENERATED_PWORD_LENGTH and self.MAX_GENERATED_PWORD_LENGTH."""
 		character_pool = string.ascii_letters + string.digits
+		password_length = int(self.config_dict['generated_password_length'])
 		# character_pool = string.ascii_letters + string.digits + string.ascii_lowercase # Skew slightly with lowercase (more readable).
-		if not self.MIN_GENERATED_PWORD_LENGTH <= self.config_dict['generated_password_length'] <= self.MAX_GENERATED_PWORD_LENGTH:
+		if not self.MIN_GENERATED_PWORD_LENGTH <= password_length <= self.MAX_GENERATED_PWORD_LENGTH:
 			logger.warning('Value for \'generated_password_length\' is not permitted. ' 
 				+ 'Using the default password length (15).')
-			self.self.config_dict['generated_password_length'] = 15
+			password_length = 15
 		while True:
-			# Take from recipes on the page for the secrets module on the official docs
+			# Taken from recipes on the page for the secrets module on the official docs
 			# secrets is preferrable to using random (note: /dev/urandom is used as a seed).
-		    password = ''.join(secrets.choice(character_pool) for i in range(20))
+		    password = ''.join(secrets.choice(character_pool) for i in range(password_length))
 		    if (any(c.islower() for c in password)
 		            and any(c.isupper() for c in password)
 		            and sum(c.isdigit() for c in password) >= 3):
