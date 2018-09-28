@@ -763,7 +763,7 @@ class PassManager:
 		logger.debug('Search result set: {}.'.format(self.search_results))
 		if not self.search_results:
 			print("Case-insensitive search with regular expression '{}'' returned no matches in {}."
-				.format(self.to_search, self.config_dict['archive_name']))
+				.format(self.options['search'], self.config_dict['archive_name']))
 			# Offer just to print all applications in consolation.
 			self.print_all_applications()
 			return
